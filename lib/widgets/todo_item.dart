@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:todoapp/constants/colors.dart';
 
 class ToDoItem extends StatelessWidget {
-  const ToDoItem({super.key});
+  const ToDoItem({key? key, required this.todo}) : super(key: key);
+  final ToDo todo;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20),
       child: ListTile(
         onTap: () {
           print('Clicked on ToDo Item');
@@ -16,7 +18,7 @@ class ToDoItem extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
         tileColor: Colors.white,
         leading: Icon(Icons.check_box,color: tdBlue,),
-        title: Text('Check Mail',style: TextStyle(fontSize: 16, color: tdBlack, decoration: TextDecoration.lineThrough),),
+        title: Text(todo.todoText!,style: TextStyle(fontSize: 16, color: tdBlack, decoration: TextDecoration.lineThrough),),
         trailing: Container(
           padding: EdgeInsets.all(0),
           margin: EdgeInsets.symmetric(vertical: 10),
@@ -30,7 +32,9 @@ class ToDoItem extends StatelessWidget {
             color: Colors.white,
             iconSize: 18,
             icon: Icon(Icons.delete,),
-            onPressed: () {},
+            onPressed: () {
+              print('Clicked on delete button');
+            },
           ),
         ),
       )
