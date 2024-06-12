@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
                   child: ListView(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 50, bottom: 20),
+                        margin: EdgeInsets.only(top: 30, bottom: 20),
                         child: Text('All ToDos',style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500),),
                       ),
 
