@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoapp/screens/favourites.dart';
 import '../model/todo.dart';
 import '../constants/colors.dart';
 import '../widgets/todo_item.dart';
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: tdBGColor,
     appBar: buildAppBar(),
+    drawer: const NavigationDrawer(),
     body: Stack(
       children: [
         Container(
@@ -160,9 +162,9 @@ class _HomeState extends State<Home> {
     backgroundColor: tdBGColor,
     elevation: 0,
     title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-      Icon(Icons.menu,color: tdBlack,size: 30,),
+      // Icon(Icons.menu,color: tdBlack,size: 30,),
       Container(
         height: 40,
         width: 40,
@@ -175,3 +177,65 @@ class _HomeState extends State<Home> {
   );
   }
 }
+
+
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildHeader(context),
+            buildMenuItems(context),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildHeader(BuildContext context) => Container(
+    padding: EdgeInsets.only(
+      top: 30,
+    ),
+  );
+  Widget buildMenuItems(BuildContext context) => Container(
+    padding: const EdgeInsets.all(25),
+    child: Wrap(
+      runSpacing: 15,
+      children: [
+        // const Divider(color: Colors.black54,),
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Home'),
+          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => Home(),
+          )),
+        ),
+        ListTile(
+          leading: const Icon(Icons.favorite_outline),
+          title: const Text('Favourites'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => Favourites(),
+            ));
+          }
+        ),
+        ListTile(
+          leading: const Icon(Icons.workspaces_outline),
+          title: const Text('Workflow'),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: const Icon(Icons.notifications_outlined),
+          title: const Text('Notifications'),
+          onTap: () {},
+        ),
+      ],
+    ),
+  );
+}
+
